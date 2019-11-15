@@ -1,0 +1,28 @@
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/alfaview/db" VERSION="20180914" COMMENT="alfaview module" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="alfaview" COMMENT="alfaview rooms and their corrseponding Moodle courses">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="300" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="room_settings_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="foreign key to alfaview room settings"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="room_settings_id_foreign" TYPE="foreign" FIELDS="room_settings_id" REFTABLE="alfaview_room_settings" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="alfaview_room_settings" COMMENT="an alfaview room id and their associated user ids for teachers and students. these are used to generate join links.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="room_id" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" COMMENT="referenced alfaview room id"/>
+        <FIELD NAME="teacher_id" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" COMMENT="referenced alfaview user id for teachers"/>
+        <FIELD NAME="student_id" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" COMMENT="referenced alfaview user id for students"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="id_primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="room_unique" TYPE="unique" FIELDS="room_id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
