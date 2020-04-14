@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -36,12 +37,14 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright   alfatraining Bildungszentrum GmbH
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class course_module_viewed extends \core\event\course_module_viewed {
+class course_module_viewed extends \core\event\course_module_viewed
+{
 
     /**
      * Initialize the event
      */
-    protected function init() {
+    protected function init()
+    {
         $this->data['objecttable'] = 'alfaview';
         parent::init();
     }

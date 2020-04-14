@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -50,3 +51,7 @@ $string['join_help_download'] = 'Stellen Sie sicher, dass alfaview installiert i
 $string['join_help_support'] = 'Benötigen Sie weitere Hilfe? Besuchen Sie das <a href="http://support.alfaview.com" target="_blank">alfaview Support-Center</a>.';
 
 $string['alfaview:view'] = 'alfaview Klassenraum';
+$string['alfaview:addinstance'] = 'alfaview Klassenraum hinzufügen';
+
+$string['privacy:metadata:alfaview'] = 'Um einen alfaview Klassenraum zu betreten, muss ein Teilnehmer einen Anzeigenamen vergeben. alfaview nutzt den Vor- und den Nachnamen eines Moodle-Nutzers und verbindet diese zu einer einzelnen Zeichenfolge. Diese Zeichenfolge wird an den Server übermittelt und eine Stunde nach Verlassen des Konferenzraumes gelöscht.';
+$string['privacy:metadata:alfaview:display_name'] = 'Der Anzeigename eines Teilnehmers in einem alfaview Klassenraum';

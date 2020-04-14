@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -49,4 +50,8 @@ $string['join_button_label'] = 'Join classroom';
 $string['join_help_download'] = 'Make sure alfaview is installed. Download <a href="https://alfaview.com/downloads" target="_blank">here</a>.';
 $string['join_help_support'] = 'Need more help? Visit the <a href="http://support.alfaview.com" target="_blank">alfaview support center</a>.';
 
-$string['alfaview:view'] = 'View alfaview classroom';
+$string['alfaview:view'] = 'alfaview classroom';
+$string['alfaview:addinstance'] = 'Add alfaview classroom';
+
+$string['privacy:metadata:alfaview'] = 'In order to join an alfaview classroom, a participant needs to provide a display name. alfaview uses the first and last name property of a Moodle user and concatenates them into a single string. This string is passed on to the meeting room server and vaporizes one hour after leaving the meeting room.';
+$string['privacy:metadata:alfaview:display_name'] = 'The display name of a participant inside an alfaview classroom';

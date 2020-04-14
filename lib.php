@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -30,10 +31,13 @@ defined('MOODLE_INTERNAL') || die();
  * @param string $feature Constant representing the feature.
  * @return true | null True if the feature is supported, null otherwise.
  */
-function alfaview_supports($feature) {
+function alfaview_supports($feature)
+{
     switch ($feature) {
-        case FEATURE_MOD_INTRO: return false;
-        default:                return null;
+        case FEATURE_MOD_INTRO:
+            return false;
+        default:
+            return null;
     }
 }
 
@@ -48,7 +52,8 @@ function alfaview_supports($feature) {
  * @param mod_alfaview_mod_form $mform The form.
  * @return int The id of the newly inserted record.
  */
-function alfaview_add_instance($moduleinstance, $mform = null) {
+function alfaview_add_instance($moduleinstance, $mform = null)
+{
     global $DB;
 
     $moduleinstance->timecreated = time();
@@ -69,7 +74,8 @@ function alfaview_add_instance($moduleinstance, $mform = null) {
  * @param mod_alfaview_mod_form $mform The form.
  * @return bool True if successful, false otherwise.
  */
-function alfaview_update_instance($moduleinstance, $mform = null) {
+function alfaview_update_instance($moduleinstance, $mform = null)
+{
     global $DB;
 
     $moduleinstance->timemodified = time();
@@ -87,7 +93,8 @@ function alfaview_update_instance($moduleinstance, $mform = null) {
  * @param int $id Id of the module instance.
  * @return bool True if successful, false on failure.
  */
-function alfaview_delete_instance($id) {
+function alfaview_delete_instance($id)
+{
     global $DB;
 
     $exists = $DB->get_record('alfaview', array('id' => $id));
@@ -100,9 +107,10 @@ function alfaview_delete_instance($id) {
     return true;
 }
 
-function alfaview_manage_room_settings($roomId) {
+function alfaview_manage_room_settings($roomId)
+{
     global $CFG, $DB;
-    require_once($CFG->dirroot.'/mod/alfaview/classes/api.php');
+    require_once($CFG->dirroot . '/mod/alfaview/classes/api.php');
 
     $settings = $DB->get_record('alfaview_room_settings', ['room_id' => $roomId]);
 

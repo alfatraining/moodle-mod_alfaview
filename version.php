@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_alfaview';
-$plugin->release = '0.2.1';
-$plugin->version = 2019111400;
+$plugin->release = '0.3.0';
+$plugin->version = 2020041400;
 $plugin->requires = 2018120300;
-$plugin->maturity = MATURITY_RC;
+$plugin->maturity = MATURITY_BETA;

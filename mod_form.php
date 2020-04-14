@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -24,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
 /**
  * Module instance settings form.
@@ -33,14 +34,16 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
  * @copyright  alfatraining Bildungszentrum GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_alfaview_mod_form extends moodleform_mod {
+class mod_alfaview_mod_form extends moodleform_mod
+{
 
     /**
      * Defines forms elements
      */
-    public function definition() {
+    public function definition()
+    {
         global $DB, $CFG;
-        require_once($CFG->dirroot.'/mod/alfaview/classes/api.php');
+        require_once($CFG->dirroot . '/mod/alfaview/classes/api.php');
         $api = new mod_alfaview_api();
         $rooms = $api->listRooms();
         $settings = $DB->get_record('alfaview_room_settings', ['id' => $this->current->room_settings_id]);
@@ -60,7 +63,9 @@ class mod_alfaview_mod_form extends moodleform_mod {
         $roomSelector = $mform->addElement('select', 'room_id', get_string('room_id', 'mod_alfaview'), $options);
         $mform->addRule('room_id', null, 'required', null, 'client');
         $mform->addRule('room_id', get_string('maximumchars', '', 36), 'maxlength', 36, 'client');
-        $roomSelector->setSelected($settings->room_id);
+        if (isset($settings->room_id)) {
+            $roomSelector->setSelected($settings->room_id);
+        }
 
         // Add standard elements.
         $this->standard_coursemodule_elements();
