@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,9 +23,9 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require(__DIR__.'/../../config.php');
+require(__DIR__ . '/../../config.php');
 
-require_once(__DIR__.'/lib.php');
+require_once(__DIR__ . '/lib.php');
 
 $id = required_param('id', PARAM_INT);
 
@@ -61,7 +62,7 @@ $table->attributes['class'] = 'generaltable mod_index';
 if ($course->format == 'weeks') {
     $table->head  = array(get_string('week'), get_string('name'));
     $table->align = array('center', 'left');
-} else if ($course->format == 'topics') {
+} elseif ($course->format == 'topics') {
     $table->head  = array(get_string('topic'), get_string('name'));
     $table->align = array('center', 'left', 'left', 'left');
 } else {
@@ -74,11 +75,13 @@ foreach ($alfaviews as $alfaview) {
         $link = html_writer::link(
             new moodle_url('/mod/alfaview/view.php', array('id' => $alfaview->coursemodule)),
             format_string($alfaview->name, true),
-            array('class' => 'dimmed'));
+            array('class' => 'dimmed')
+        );
     } else {
         $link = html_writer::link(
             new moodle_url('/mod/alfaview/view.php', array('id' => $alfaview->coursemodule)),
-            format_string($alfaview->name, true));
+            format_string($alfaview->name, true)
+        );
     }
 
     if ($course->format == 'weeks' or $course->format == 'topics') {

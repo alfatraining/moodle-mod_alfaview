@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -24,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__.'/upgradelib.php');
+require_once(__DIR__ . '/upgradelib.php');
 
 /**
  * Execute mod_alfaview upgrade from the given old version.
@@ -32,7 +33,8 @@ require_once(__DIR__.'/upgradelib.php');
  * @param int $oldversion
  * @return bool
  */
-function xmldb_alfaview_upgrade($oldversion) {
+function xmldb_alfaview_upgrade($oldversion)
+{
     global $DB;
 
     $dbman = $DB->get_manager();

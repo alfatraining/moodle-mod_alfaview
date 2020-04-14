@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,7 +26,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot.'/mod/alfaview/vendor/autoload.php');
+require_once($CFG->dirroot . '/mod/alfaview/vendor/autoload.php');
 
 if ($ADMIN->fulltree) {
     // init the settings page

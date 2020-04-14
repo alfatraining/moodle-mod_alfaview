@@ -5,35 +5,47 @@
 		<name>alfatraining/alfaview-php-sdk</name>
 		<description>null</description>
 		<version>v2.0</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
 	</library>
 	<library>
 		<location>vendor/guzzlehttp/guzzle</location>
 		<name>guzzlehttp/guzzle</name>
 		<description>Guzzle is a PHP HTTP client library</description>
-		<version>6.4.1</version>
+		<version>6.5.2</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
 	</library>
 	<library>
 		<location>vendor/guzzlehttp/promises</location>
 		<name>guzzlehttp/promises</name>
 		<description>Guzzle promises library</description>
 		<version>v1.3.1</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
 	</library>
 	<library>
 		<location>vendor/guzzlehttp/psr7</location>
 		<name>guzzlehttp/psr7</name>
 		<description>PSR-7 message implementation that also provides common utility methods</description>
 		<version>1.6.1</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
 	</library>
 	<library>
 		<location>vendor/psr/http-message</location>
 		<name>psr/http-message</name>
 		<description>Common interface for HTTP messages</description>
 		<version>1.0.1</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
 	</library>
 	<library>
 		<location>vendor/ralouphie/getallheaders</location>
 		<name>ralouphie/getallheaders</name>
 		<description>A polyfill for getallheaders.</description>
 		<version>3.0.3</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
 	</library>
 </libraries>
