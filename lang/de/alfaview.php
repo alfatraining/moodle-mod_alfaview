@@ -30,13 +30,14 @@ $string['pluginadministration'] = 'alfaview verwalten';
 $string['pluginname'] = 'alfaview';
 $string['settings'] = 'Konfiguration';
 $string['settings_desc'] = 'alfaview konfigurieren';
-$string['api_host'] = 'API Host';
+$string['api_description'] = 'API-Informationen finden Sie in der Administrationsoberfläche unter <a href="https://app.alfaview.com/#/settings/api-keys" target="_blank">Kontoverwaltung</a>.';
+$string['api_host'] = 'Host';
 $string['api_host_desc'] = 'Die URL der alfaview API.';
-$string['api_client_id'] = 'API Client ID';
+$string['api_client_id'] = 'Alias (Client ID)';
 $string['api_client_id_desc'] = 'Der Nutzername Ihrer alfaview API Zugangsdaten.';
-$string['api_code'] = 'API Code';
+$string['api_code'] = 'Secret';
 $string['api_code_desc'] = 'Das Passwort Ihrer alfaview API Zugangsdaten.';
-$string['api_company_id'] = 'API Company ID';
+$string['api_company_id'] = 'Account ID';
 $string['api_company_id_desc'] = 'Der Kontoname Ihrer alfaview API Zugangsdaten.';
 
 $string['modulename'] = 'alfaview Klassenraum';
@@ -44,7 +45,8 @@ $string['modulenameplural'] = 'alfaview Klassenräume';
 $string['modulename_help'] = 'Nutzen Sie die alfaview Videokonferenz-Technologie um zuverlässige, qualitativ hochwertige Online-Seminare durchzuführen.';
 
 $string['room_id'] = 'Raum auswählen';
-$string['room_select'] = '-- Raum auswählen --';
+$string['room_select'] = 'Raum suchen';
+$string['room_select_help'] = 'Besuchen Sie <a href="https://app.alfaview.com/" target="_blank">Ihr alfaview-Konto</a> um weitere Räume zu erstellen.';
 
 $string['join_button_label'] = 'Klassenraum betreten';
 $string['join_help_download'] = 'Stellen Sie sicher, dass alfaview installiert ist. Download <a href="https://alfaview.com/downloads" target="_blank">hier</a>.';

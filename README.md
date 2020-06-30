@@ -5,5 +5,6 @@ This plugin integrates the alfaview video conferencing capabilities with Moodle.
 
 ## Installing the plugin
 
-Contact support@alfaview.com to obtain API credentials for your alfaview account.
+API information is available in the alfaview admin app, under [Account Management](https://app.alfaview.com/#/settings/api-keys).
+Alternatively you can contact support@alfaview.com to obtain API credentials for your alfaview account.
 Download the latest release of this plugin and install via the plugin installer (requires administrative privileges).

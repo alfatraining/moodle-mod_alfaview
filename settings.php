@@ -40,6 +40,12 @@ if ($ADMIN->fulltree) {
     $description = format_text(get_string('settings_desc', 'mod_alfaview'), FORMAT_MARKDOWN);
     $settings->add(new admin_setting_heading($name, $title, $description));
 
+    // settings page heading
+    $name = 'mod_alfaview/api_description';
+    $title = '';
+    $description = format_text(get_string('api_description', 'mod_alfaview'));
+    $settings->add(new admin_setting_description($name, $title, $description));
+
     // alfaview api host
     $name = 'mod_alfaview/api_host';
     $title = get_string('api_host', 'mod_alfaview');
