@@ -55,14 +55,17 @@ class mod_alfaview_mod_form extends moodleform_mod
 
         // Add alfaview room id
         $options = array();
-        $options[] = get_string('room_select', 'mod_alfaview');
+        $options[] = '';
         foreach ($rooms as $id => $room) {
             $options[$id] = $room->getDisplayName();
         }
         asort($options);
-        $roomSelector = $mform->addElement('select', 'room_id', get_string('room_id', 'mod_alfaview'), $options);
+        $autocompleteOpts = ['placeholder' => get_string('room_select', 'mod_alfaview')];
+        $roomSelector = $mform->addElement('autocomplete', 'room_id', get_string('room_id', 'mod_alfaview'), $options, $autocompleteOpts);
         $mform->addRule('room_id', null, 'required', null, 'client');
         $mform->addRule('room_id', get_string('maximumchars', '', 36), 'maxlength', 36, 'client');
+        $mform->addElement('static', 'add_room_help', '', get_string('room_select_help', 'mod_alfaview'));
+
         if (isset($settings->room_id)) {
             $roomSelector->setSelected($settings->room_id);
         }

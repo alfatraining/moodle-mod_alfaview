@@ -28,6 +28,7 @@ use Alfaview\Model\AuthenticationAuthorizationCodeCredentials;
 use Alfaview\Model\AuthenticationGuestAccessCredentials;
 use Alfaview\Model\CommonPermissions;
 use Alfaview\Model\CommonRoom;
+use Alfaview\Model\CommonRoomType;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -141,6 +142,9 @@ class mod_alfaview_api
         $this->authenticate();
         $response = $this->av->roomList($this->accessToken);
         $rooms = $response->reply->getRooms();
+        $rooms = array_filter($rooms, function($room){
+            return $room->getType() === CommonRoomType::ROOM;
+        });
 
         return $rooms;
     }
