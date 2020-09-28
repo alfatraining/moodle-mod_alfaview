@@ -46,5 +46,8 @@ function xmldb_alfaview_upgrade($oldversion)
     // Documentation for the XMLDB Editor can be found at:
     // https://docs.moodle.org/dev/XMLDB_editor
 
+    if ($oldversion <= 2020063000) {
+        unset_config('api_host', 'mod_alfaview');
+    }
     return true;
 }

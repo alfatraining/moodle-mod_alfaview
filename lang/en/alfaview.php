@@ -31,14 +31,14 @@ $string['pluginname'] = 'alfaview';
 $string['settings'] = 'Configuration';
 $string['settings_desc'] = 'Configure alfaview';
 $string['api_description'] = 'API information is available in the alfaview admin app, under <a href="https://app.alfaview.com/#/settings/api-keys" target="_blank">Account Management</a>.';
-$string['api_host'] = 'Host';
-$string['api_host_desc'] = 'The URL of the alfaview API.';
 $string['api_client_id'] = 'Alias (Client ID)';
 $string['api_client_id_desc'] = 'The username of your alfaview API credentials.';
 $string['api_code'] = 'Secret';
 $string['api_code_desc'] = 'The password of your alfaview API credentials.';
 $string['api_company_id'] = 'Account ID';
 $string['api_company_id_desc'] = 'The account identifier of your alfaview API credentials.';
+$string['connection_status_ok'] = 'Connection successful.';
+$string['connection_status_error'] = 'Connection failed, please check that you entered the correct values and that the user who created the API key has permissions to administrate user and rooms.';
 
 $string['modulename'] = 'alfaview classroom';
 $string['modulenameplural'] = 'alfaview classrooms';

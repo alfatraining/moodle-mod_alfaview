@@ -40,18 +40,11 @@ if ($ADMIN->fulltree) {
     $description = format_text(get_string('settings_desc', 'mod_alfaview'), FORMAT_MARKDOWN);
     $settings->add(new admin_setting_heading($name, $title, $description));
 
-    // settings page heading
+    // settings page description
     $name = 'mod_alfaview/api_description';
     $title = '';
     $description = format_text(get_string('api_description', 'mod_alfaview'));
     $settings->add(new admin_setting_description($name, $title, $description));
-
-    // alfaview api host
-    $name = 'mod_alfaview/api_host';
-    $title = get_string('api_host', 'mod_alfaview');
-    $description = get_string('api_host_desc', 'mod_alfaview');
-    $default = Alfaview\Alfaview::API_HOST;
-    $settings->add(new admin_setting_configtext($name, $title, $description, $default));
 
     // alfaview api client id
     $name = 'mod_alfaview/api_client_id';
@@ -73,4 +66,36 @@ if ($ADMIN->fulltree) {
     $description = get_string('api_company_id_desc', 'mod_alfaview');
     $default = '';
     $settings->add(new admin_setting_configtext($name, $title, $description, $default));
+
+    // test connection to alfaview
+    if ($PAGE->url == $CFG->wwwroot . '/' . $CFG->admin . '/settings.php?section=modsettingalfaview') {
+        $config = get_config('mod_alfaview');
+        $testApiClientId = $config->api_client_id;
+        $testApiCode = $config->api_code;
+        $testApiCompanyId = $config->api_company_id;
+        try {
+            $av = new Alfaview\Alfaview();
+            $credentials = new Alfaview\Model\AuthenticationAuthorizationCodeCredentials();
+            $credentials->setClientId($testApiClientId);
+            $credentials->setCode($testApiCode);
+            $credentials->setCompanyId($testApiCompanyId);
+
+            $response = $av->authenticate($credentials);
+            if ($response->hasError) {
+                $connection_status = $OUTPUT->notification(get_string('connection_status_error', 'mod_alfaview'), 'notifyproblem');
+            } else {
+                $permissions = $response->reply->getPermissions();
+                if (is_array($permissions) && $permissions[5] && $permissions[15]) {
+                    $connection_status = $OUTPUT->notification(get_string('connection_status_ok', 'mod_alfaview'), 'notifysuccess');
+                } else {
+                    $connection_status = $OUTPUT->notification(get_string('connection_status_error', 'mod_alfaview'), 'notifyproblem');
+                }
+            }
+        } catch (moodle_exception $error) {
+            $connection_status = $OUTPUT->notification(get_string('connection_status_error', 'mod_alfaview'), 'notifyproblem');
+        }
+        $name = 'mod_alfaview/api_status';
+        $title = '';
+        $settings->add(new admin_setting_description($name, $title, $connection_status));
+    }
 }

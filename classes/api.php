@@ -37,7 +37,6 @@ require_once($CFG->dirroot . '/mod/alfaview/vendor/autoload.php');
 class mod_alfaview_api
 {
     private $av;
-    private $apiHost;
     private $apiClientId;
     private $apiCode;
     private $apiCompanyId;
@@ -48,14 +47,12 @@ class mod_alfaview_api
     {
         $config = get_config('mod_alfaview');
 
-        $this->apiHost = $config->api_host;
         $this->apiClientId = $config->api_client_id;
         $this->apiCode = $config->api_code;
         $this->apiCompanyId = $config->api_company_id;
         $this->apiGuestCode = $config->api_guest_code;
 
         $this->av = new Alfaview();
-        $this->av->setHost($this->apiHost);
     }
 
     public function authenticate()

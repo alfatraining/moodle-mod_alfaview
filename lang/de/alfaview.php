@@ -31,14 +31,14 @@ $string['pluginname'] = 'alfaview';
 $string['settings'] = 'Konfiguration';
 $string['settings_desc'] = 'alfaview konfigurieren';
 $string['api_description'] = 'API-Informationen finden Sie in der Administrationsoberfläche unter <a href="https://app.alfaview.com/#/settings/api-keys" target="_blank">Kontoverwaltung</a>.';
-$string['api_host'] = 'Host';
-$string['api_host_desc'] = 'Die URL der alfaview API.';
 $string['api_client_id'] = 'Alias (Client ID)';
 $string['api_client_id_desc'] = 'Der Nutzername Ihrer alfaview API Zugangsdaten.';
 $string['api_code'] = 'Secret';
 $string['api_code_desc'] = 'Das Passwort Ihrer alfaview API Zugangsdaten.';
 $string['api_company_id'] = 'Account ID';
 $string['api_company_id_desc'] = 'Der Kontoname Ihrer alfaview API Zugangsdaten.';
+$string['connection_status_ok'] = 'Verbindung erfolgreich.';
+$string['connection_status_error'] = 'Verbindung fehlgeschlagen. Überprüfen Sie, ob Sie die richtigen Werte eingegeben haben und ob der Benutzer, der den API-Schlüssel erstellt hat, über Berechtigungen zum Verwalten von Benutzern und Räumen verfügt.';
 
 $string['modulename'] = 'alfaview Klassenraum';
 $string['modulenameplural'] = 'alfaview Klassenräume';
