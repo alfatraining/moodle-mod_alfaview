@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "645da37ea8de529d7b62717b08491329",
+    "content-hash": "de26b9bdace1b567bcd0138264cb5825",
     "packages": [
         {
             "name": "alfatraining/alfaview-php-sdk",
-            "version": "v2.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alfatraining/alfaview-php-sdk.git",
-                "reference": "0ef8b600c4c9b0bb75ae7e934ce50745ce285b01"
+                "reference": "e6a8ef3ffb526f6843a8919c9462ac51d10b02e8"
             },
             "require": {
                 "ext-curl": "*",
@@ -35,7 +35,7 @@
                     "Alfaview\\": "test/"
                 }
             },
-            "time": "2019-11-13T17:34:01+00:00"
+            "time": "2020-09-28T13:12:42+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
