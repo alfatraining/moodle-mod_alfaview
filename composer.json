@@ -10,6 +10,6 @@
         }
     },
     "require": {
-        "alfatraining/alfaview-php-sdk": "~2.0"
+        "alfatraining/alfaview-php-sdk": "2.1.0"
     }
 }
