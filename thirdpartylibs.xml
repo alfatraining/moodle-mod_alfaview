@@ -4,7 +4,7 @@
 		<location>vendor/alfatraining/alfaview-php-sdk</location>
 		<name>alfatraining/alfaview-php-sdk</name>
 		<description>null</description>
-		<version>v2.0</version>
+		<version>v2.4.0</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
@@ -12,7 +12,7 @@
 		<location>vendor/guzzlehttp/guzzle</location>
 		<name>guzzlehttp/guzzle</name>
 		<description>Guzzle is a PHP HTTP client library</description>
-		<version>6.5.2</version>
+		<version>7.5.0</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
@@ -41,10 +41,34 @@
 		<licenseversion></licenseversion>
 	</library>
 	<library>
+		<location>vendor/psr/http-client</location>
+		<name>psr/http-client</name>
+		<description>Common interface for HTTP clients</description>
+		<version>1.0.1</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
+	</library>
+	<library>
+		<location>vendor/psr/http-factory</location>
+		<name>psr/http-factory</name>
+		<description>Common interfaces for PSR-7 HTTP message factories</description>
+		<version>1.0.1</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
+	</library>
+	<library>
 		<location>vendor/ralouphie/getallheaders</location>
 		<name>ralouphie/getallheaders</name>
 		<description>A polyfill for getallheaders.</description>
 		<version>3.0.3</version>
+		<license>MIT</license>
+		<licenseversion></licenseversion>
+	</library>
+	<library>
+		<location>vendor/symfony/deprecation-contracts</location>
+		<name>symfony/deprecation-contracts</name>
+		<description>A generic function and convention to trigger deprecation notices.</description>
+		<version>v3.1.1</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>

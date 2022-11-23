@@ -25,10 +25,8 @@
 
 use Alfaview\Alfaview;
 use Alfaview\Model\AuthenticationAuthorizationCodeCredentials;
-use Alfaview\Model\AuthenticationGuestAccessCredentials;
-use Alfaview\Model\CommonPermissions;
-use Alfaview\Model\CommonRoom;
 use Alfaview\Model\CommonRoomType;
+use Alfaview\Model\GuestServiceV2GroupLinkCreation;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -84,47 +82,28 @@ class mod_alfaview_api
 
     public function createUser($roomId, $vip = false, $promote = false)
     {
-        // create a reusable guest object
-        $guestAccessCredentials = new AuthenticationGuestAccessCredentials();
-        $guestAccessCredentials->setDisplayName("Guest created by Moodle");
-        $guestAccessCredentials->setShareable(true);
-        $guestAccessCredentials->setExpiry("-1"); // never expire
-        $guestAccessCredentials->setRoomId($roomId);
-        $guestAccessCredentials->setCompanyId($this->apiCompanyId);
-        $guestAccessCredentials->setCode($this->apiGuestCode);
+        $groupLinkRole = $vip && $promote ? 'Moderator' : 'Participant';
 
-        $response = $this->av->createAuthentication($this->accessToken, $guestAccessCredentials);
-        $userId = $response->reply->getUserId();
+        $permissionGroupId = $this->av->getPermissionGroupId($this->accessToken, $groupLinkRole);
+        $groupLink = new GuestServiceV2GroupLinkCreation();
+        $groupLink->setPermissionGroupId($permissionGroupId);
+        $groupLink->setDescription("Guest created by Moodle");
+        $response = $this->av->createGroupLink($this->accessToken, $roomId, [$groupLink]);
 
-        // assign permissions to guest object in the selected room
-        $guestPermissions = new CommonPermissions();
-        $guestPermissions->setVoice(true);
-        $guestPermissions->setVideo(true);
-        $guestPermissions->setJoin(true);
-        $guestPermissions->setChat(true);
-        $guestPermissions->setScreen(true);
-        $guestPermissions->setFairUse(true);
-        $guestPermissions->setVip($vip);
-        $guestPermissions->setPromote($promote);
+        $groupLink = $response->reply->getGroupLinks()[0];
+        $groupLinkId = $groupLink->getAccessKey();
 
-        $room = new CommonRoom();
-        $room->setPermissions(array($userId => $guestPermissions));
-
-        $response = $this->av->updateRoom($this->accessToken, $roomId, $room);
-        return $userId;
+        return $groupLinkId;
     }
 
     public function createJoinLink($userId, $displayName, $roomId)
     {
         // contact the alfaview api as guest user
-        $credentials = new AuthenticationGuestAccessCredentials();
-        $credentials->setUserId($userId);
-        $credentials->setCode($this->apiGuestCode);
-        $credentials->setCompanyId($this->apiCompanyId);
-        $credentials->setDisplayName($displayName);
-        $credentials->setRoomId($roomId);
-
-        $response = $this->av->authenticate($credentials);
+        $response = $this->av->guestAuthenticate(
+            $this->apiCompanyId,
+            $roomId,
+            $userId,
+            $displayName);
         $accessToken = $response->reply->getAccessToken();
 
         // create guest link
