@@ -49,7 +49,7 @@ $string['room_select'] = 'Search a room';
 $string['room_select_help'] = 'Go to <a href="https://app.alfaview.com/" target="_blank">your alfaview account</a> to create more rooms.';
 
 $string['join_button_label'] = 'Join classroom';
-$string['join_help_download'] = 'Make sure alfaview is installed. Download <a href="https://alfaview.com/downloads" target="_blank">here</a>.';
+$string['join_help_download'] = 'Make sure alfaview is installed. Download <a href="https://alfaview.com/download" target="_blank">here</a>.';
 $string['join_help_support'] = 'Need more help? Visit the <a href="http://support.alfaview.com" target="_blank">alfaview support center</a>.';
 
 $string['alfaview:view'] = 'alfaview classroom';

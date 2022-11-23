@@ -46,7 +46,10 @@ class mod_alfaview_mod_form extends moodleform_mod
         require_once($CFG->dirroot . '/mod/alfaview/classes/api.php');
         $api = new mod_alfaview_api();
         $rooms = $api->listRooms();
-        $settings = $DB->get_record('alfaview_room_settings', ['id' => $this->current->room_settings_id]);
+
+        if (isset($this->current->room_settings_id)) {
+            $settings = $DB->get_record('alfaview_room_settings', ['id' => $this->current->room_settings_id]);
+        }
 
         $mform = $this->_form;
 
@@ -66,7 +69,7 @@ class mod_alfaview_mod_form extends moodleform_mod
         $mform->addRule('room_id', get_string('maximumchars', '', 36), 'maxlength', 36, 'client');
         $mform->addElement('static', 'add_room_help', '', get_string('room_select_help', 'mod_alfaview'));
 
-        if (isset($settings->room_id)) {
+        if (isset($settings) && isset($settings->room_id)) {
             $roomSelector->setSelected($settings->room_id);
         }
 
