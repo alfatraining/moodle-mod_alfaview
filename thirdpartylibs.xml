@@ -68,7 +68,7 @@
 		<location>vendor/symfony/deprecation-contracts</location>
 		<name>symfony/deprecation-contracts</name>
 		<description>A generic function and convention to trigger deprecation notices.</description>
-		<version>v3.1.1</version>
+		<version>v2.5.2</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>

@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_alfaview';
-$plugin->release = '0.3.3';
-$plugin->version = 2022112100;
+$plugin->release = '0.3.4';
+$plugin->version = 2023050500;
 $plugin->requires = 2018120300;
 $plugin->maturity = MATURITY_STABLE;
