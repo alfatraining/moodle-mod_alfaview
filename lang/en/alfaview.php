@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -39,6 +38,9 @@ $string['api_company_id'] = 'Account ID';
 $string['api_company_id_desc'] = 'The account identifier of your alfaview API credentials.';
 $string['connection_status_ok'] = 'Connection successful.';
 $string['connection_status_error'] = 'Connection failed, please check that you entered the correct values and that the user who created the API key has permissions to administrate user and rooms.';
+$string['user_create_error'] = 'alfaview group link creation for room failed.';
+$string['join_link_create_error'] = 'Join link creation for room/user failed.';
+$string['room_list_error'] = 'Listing alfaview rooms failed.';
 
 $string['modulename'] = 'alfaview classroom';
 $string['modulenameplural'] = 'alfaview classrooms';

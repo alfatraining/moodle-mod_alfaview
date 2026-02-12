@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -23,13 +22,10 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Custom uninstallation procedure.
  */
-function xmldb_alfaview_uninstall()
-{
+function xmldb_alfaview_uninstall() {
 
     return true;
 }

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -34,18 +33,16 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
  * @copyright  alfatraining Bildungszentrum GmbH
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_alfaview_mod_form extends moodleform_mod
-{
-
+class mod_alfaview_mod_form extends moodleform_mod {
     /**
      * Defines forms elements
      */
-    public function definition()
-    {
+    public function definition() {
         global $DB, $CFG;
         require_once($CFG->dirroot . '/mod/alfaview/classes/api.php');
         $api = new mod_alfaview_api();
-        $rooms = $api->listRooms();
+
+        $rooms = $api->list_rooms();
 
         if (isset($this->current->room_settings_id)) {
             $settings = $DB->get_record('alfaview_room_settings', ['id' => $this->current->room_settings_id]);
@@ -56,21 +53,27 @@ class mod_alfaview_mod_form extends moodleform_mod
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
-        // Add alfaview room id
-        $options = array();
+        // Add alfaview room id to autocomplete options.
+        $options = [];
         $options[] = '';
-        foreach ($rooms as $id => $room) {
-            $options[$id] = $room->getDisplayName();
+        foreach ($rooms as $room) {
+            $options[$room->getId()] = $room->getDisplayName();
         }
         asort($options);
-        $autocompleteOpts = ['placeholder' => get_string('room_select', 'mod_alfaview')];
-        $roomSelector = $mform->addElement('autocomplete', 'room_id', get_string('room_id', 'mod_alfaview'), $options, $autocompleteOpts);
+        $autocompleteopts = ['placeholder' => get_string('room_select', 'mod_alfaview')];
+        $roomselector = $mform->addElement(
+            'autocomplete',
+            'room_id',
+            get_string('room_id', 'mod_alfaview'),
+            $options,
+            $autocompleteopts
+        );
         $mform->addRule('room_id', null, 'required', null, 'client');
         $mform->addRule('room_id', get_string('maximumchars', '', 36), 'maxlength', 36, 'client');
         $mform->addElement('static', 'add_room_help', '', get_string('room_select_help', 'mod_alfaview'));
 
         if (isset($settings) && isset($settings->room_id)) {
-            $roomSelector->setSelected($settings->room_id);
+            $roomselector->setSelected($settings->room_id);
         }
 
         // Add standard elements.

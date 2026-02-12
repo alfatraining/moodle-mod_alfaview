@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -31,8 +30,6 @@ use core_privacy\local\request\approved_userlist;
 use core_privacy\local\request\contextlist;
 use core_privacy\local\request\userlist;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy class for compliance requirements.
  *
@@ -42,16 +39,14 @@ defined('MOODLE_INTERNAL') || die();
  */
 class provider implements \core_privacy\local\metadata\provider
 {
-
     /**
      * Get all metadata for this plugin with regards to privacy.
      *
      * @param   collection  $collection The collection to add items to.
      * @return  collection  $collection The collection of user data used in this plugin.
      */
-    public static function get_metadata(collection $collection): collection
-    {
-        // alfaview uses the first and last name of a user and passes it to the alfaview API in order to display it inside a meeting room.
+    public static function get_metadata(collection $collection): collection {
+        // Alfaview uses the first and last name of a user and passes it to the alfaview API to display it inside a meeting room.
         // This data is not stored anywhere, it only exists inside the guest token.
         $collection->add_external_location_link('alfaview', [
             'display_name' => 'privacy:metadata:alfaview:display_name',
@@ -66,8 +61,8 @@ class provider implements \core_privacy\local\metadata\provider
      * @param   int           $userid       The user to search.
      * @return  contextlist   $contextlist  The list of contexts used in this plugin.
      */
-    public static function get_contexts_for_userid(int $userid): contextlist
-    {
+    public static function get_contexts_for_userid(int $userid): contextlist {
+        return new contextlist();
     }
 
     /**
@@ -75,8 +70,7 @@ class provider implements \core_privacy\local\metadata\provider
      *
      * @param approved_contextlist $contextlist The approved contexts to export information for.
      */
-    public static function export_user_data(approved_contextlist $contextlist)
-    {
+    public static function export_user_data(approved_contextlist $contextlist) {
     }
 
     /**
@@ -84,8 +78,7 @@ class provider implements \core_privacy\local\metadata\provider
      *
      * @param context $context Context to delete data from.
      */
-    public static function delete_data_for_all_users_in_context(context $context)
-    {
+    public static function delete_data_for_all_users_in_context(context $context) {
     }
 
     /**
@@ -93,8 +86,7 @@ class provider implements \core_privacy\local\metadata\provider
      *
      * @param approved_contextlist $contextlist a list of contexts approved for deletion.
      */
-    public static function _delete_data_for_user(approved_contextlist $contextlist)
-    {
+    public static function delete_data_for_user(approved_contextlist $contextlist) {
     }
 
     /**
@@ -102,8 +94,7 @@ class provider implements \core_privacy\local\metadata\provider
      *
      * @param userlist $userlist The userlist containing the list of users who have data in this context/plugin combination.
      */
-    public static function get_users_in_context(userlist $userlist)
-    {
+    public static function get_users_in_context(userlist $userlist) {
     }
 
     /**
@@ -111,7 +102,6 @@ class provider implements \core_privacy\local\metadata\provider
      *
      * @param approved_userlist $userlist The approved context and user information to delete information for.
      */
-    public static function delete_data_for_users(approved_userlist $userlist)
-    {
+    public static function delete_data_for_users(approved_userlist $userlist) {
     }
 }
