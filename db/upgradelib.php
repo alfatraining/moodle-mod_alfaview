@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -23,18 +22,15 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Helper function used by the upgrade.php file.
  */
-function mod_alfaview_helper_function()
-{
+function mod_alfaview_helper_function() {
     global $DB;
 
     // Please note that you should always be performing any task using raw (low
     // level) database access exclusively, avoiding any use of the Moodle APIs.
     //
     // For more information please read the available Moodle documentation:
-    // https://docs.moodle.org/dev/Upgrade_API
+    // https://docs.moodle.org/dev/Upgrade_API .
 }

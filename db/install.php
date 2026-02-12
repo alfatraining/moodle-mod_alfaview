@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -23,18 +22,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Custom code to be run on installing the plugin.
  */
-function xmldb_alfaview_install()
-{
-
-    $apiGuestCode = get_config('mod_alfaview', 'api_guest_code');
-    if (empty($apiGuestCode)) {
-        set_config('api_guest_code', substr(md5(rand()), 0, 16), 'mod_alfaview');
-    }
-
-    return true;
+function xmldb_alfaview_install() {
 }

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -23,7 +22,13 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use Alfaview\Alfaview;
+use Alfaview\Client\Alfaview;
+use Alfaview\Client\ApiException;
+use Alfaview\Client\Model\APICredentials;
+use Alfaview\Client\Model\AuthenticateGroupLinkRequestBody;
+use Alfaview\Client\Model\CreateGroupLinksRequestBody;
+use Alfaview\Client\Model\GroupLinkCreate;
+use Alfaview\Client\Model\Room;
 use Alfaview\Model\AuthenticationAuthorizationCodeCredentials;
 use Alfaview\Model\CommonRoomType;
 use Alfaview\Model\GuestServiceV2GroupLinkCreation;
@@ -32,96 +37,184 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/alfaview/vendor/autoload.php');
 
-class mod_alfaview_api
-{
+/**
+ * API wrapper class for alfaview video conferencing.
+ *
+ * Handles authentication and API calls to the alfaview platform including
+ * room management, user creation, and join link generation.
+ */
+class mod_alfaview_api {
+    /** @var Alfaview The alfaview API instance. */
     private $av;
-    private $apiClientId;
-    private $apiCode;
-    private $apiCompanyId;
-    private $apiGuestCode;
-    private $accessToken;
+    /** @var string The API client ID. */
+    private $apiclientid;
+    /** @var string The API authorization code. */
+    private $apicode;
+    /** @var string The API company ID. */
+    private $apicompanyid;
+    /** @var string The current access token. */
+    private $accesstoken;
 
-    public function __construct()
-    {
+    /**
+     * Constructor - initializes API configuration.
+     */
+    public function __construct() {
         $config = get_config('mod_alfaview');
 
-        $this->apiClientId = $config->api_client_id;
-        $this->apiCode = $config->api_code;
-        $this->apiCompanyId = $config->api_company_id;
-        $this->apiGuestCode = $config->api_guest_code;
+        $this->apiclientid = $config->api_client_id;
+        $this->apicode = $config->api_code;
+        $this->apicompanyid = $config->api_company_id;
 
         $this->av = new Alfaview();
     }
 
-    public function authenticate()
-    {
-        if (!empty($this->accessToken) && $this->av->isAuthenticated($this->accessToken)) {
+    /**
+     * Authenticates with the alfaview API.
+     *
+     * Obtains and stores an access token if not already authenticated.
+     */
+    public function authenticate() {
+        if (!empty($this->accesstoken)) {
             return;
         }
 
-        $credentials = new AuthenticationAuthorizationCodeCredentials();
-        $credentials->setClientId($this->apiClientId);
-        $credentials->setCode($this->apiCode);
-        $credentials->setCompanyId($this->apiCompanyId);
+        $credentials = new APICredentials();
+        $credentials->setClientId($this->apiclientid);
+        $credentials->setKey($this->apicode);
+        $credentials->setCompanyId($this->apicompanyid);
 
-        $response = $this->av->authenticate($credentials);
-        $this->accessToken = $response->reply->getAccessToken();
+        try {
+            $response = $this->av->authenticationApi->authenticateAPIKey($credentials);
+            $this->accesstoken = $response->getAccessToken();
+        } catch (ApiException $e) {
+            throw new moodle_exception(
+                get_string('connection_status_error', 'mod_alfaview'),
+                'mod_alfaview'
+            );
+        }
     }
 
-    public function createTeacher($roomId)
-    {
-        $this->authenticate();
-        return $this->createUser($roomId, true, true);
+    /**
+     * Creates a teacher user for a room.
+     *
+     * @param string $roomid The room ID.
+     * @return string The user access key.
+     */
+    public function create_teacher($roomid) {
+        return $this->create_user($roomid, true, true);
     }
 
-    public function createStudent($roomId)
-    {
-        $this->authenticate();
-        return $this->createUser($roomId);
+    /**
+     * Creates a student user for a room.
+     *
+     * @param string $roomid The room ID.
+     * @return string The user access key.
+     */
+    public function create_student($roomid) {
+        return $this->create_user($roomid);
     }
 
-    public function createUser($roomId, $vip = false, $promote = false)
-    {
-        $groupLinkRole = $vip && $promote ? 'Moderator' : 'Participant';
+    /**
+     * Creates a user for a room.
+     *
+     * @param string $roomid The room ID.
+     * @param bool $vip Whether user is VIP.
+     * @param bool $promote Whether to promote user.
+     * @return string The user access key.
+     */
+    public function create_user($roomid, $vip = false, $promote = false) {
+        try {
+            $this->authenticate();
 
-        $permissionGroupId = $this->av->getPermissionGroupId($this->accessToken, $groupLinkRole);
-        $groupLink = new GuestServiceV2GroupLinkCreation();
-        $groupLink->setPermissionGroupId($permissionGroupId);
-        $groupLink->setDescription("Guest created by Moodle");
-        $response = $this->av->createGroupLink($this->accessToken, $roomId, [$groupLink]);
+            $grouplinkrole = $vip && $promote ? 'Moderator' : 'Participant';
 
-        $groupLink = $response->reply->getGroupLinks()[0];
-        $groupLinkId = $groupLink->getAccessKey();
+            $permissiongroups = $this->av->roomsApi->listPermissionGroups($this->accesstoken);
 
-        return $groupLinkId;
+            $grouplinkcreate = new GroupLinkCreate();
+            $grouplinkcreate->setDescription("$grouplinkrole created by alfatraining-com for $roomid");
+            $grouplinkcreate->setDialInAllowed(false);
+
+            foreach ($permissiongroups as $group) {
+                if ($group->getName() === $grouplinkrole) {
+                    $grouplinkcreate->setPermissionGroupId($group->getId());
+                }
+            }
+
+            $grouplinks = new CreateGroupLinksRequestBody();
+            $grouplinks->setCreate([$grouplinkcreate]);
+            $response = $this->av->guestsApi->createGroupLink($roomid, $grouplinks, $this->accesstoken);
+
+            $grouplinkid = $response[0]->getId();
+            $grouplink = $this->av->guestsApi->getGroupLink($grouplinkid, $this->accesstoken);
+
+            return $grouplink->getAccessKey();
+        } catch (ApiException $e) {
+            throw new moodle_exception(
+                get_string('user_create_error', 'mod_alfaview'),
+                'mod_alfaview'
+            );
+        }
     }
 
-    public function createJoinLink($userId, $displayName, $roomId)
-    {
-        // contact the alfaview api as guest user
-        $response = $this->av->guestAuthenticate(
-            $this->apiCompanyId,
-            $roomId,
-            $userId,
-            $displayName);
-        $accessToken = $response->reply->getAccessToken();
+    /**
+     * Creates a join link for a user.
+     *
+     * @param string $userid The user ID.
+     * @param string $displayname The display name.
+     * @param string $roomid The room ID.
+     * @return string The join link.
+     */
+    public function create_join_link($userid, $displayname, $roomid) {
+        // Contact the alfaview api as guest user.
+        $guestcredentials = new AuthenticateGroupLinkRequestBody();
+        $guestcredentials->setCompanyId($this->apicompanyid);
+        $guestcredentials->setRoomId($roomid);
+        $guestcredentials->setAccessKey($userid);
+        $guestcredentials->setDisplayName($displayname);
 
-        // create guest link
-        $response = $this->av->createJoinLink($accessToken, $roomId);
-        $joinLink = $response->reply->getJoinLink();
+        try {
+            $response = $this->av->authenticationApi->authenticateGroupLink($guestcredentials);
 
-        return $joinLink;
+            return $response->getClientLaunchUrl();
+        } catch (ApiException $e) {
+            throw new moodle_exception(
+                get_string('join_link_create_error', 'mod_alfaview'),
+                'mod_alfaview'
+            );
+        }
     }
 
-    public function listRooms()
-    {
-        $this->authenticate();
-        $response = $this->av->roomList($this->accessToken);
-        $rooms = $response->reply->getRooms();
-        $rooms = array_filter($rooms, function($room){
-            return $room->getType() === CommonRoomType::ROOM;
-        });
+    /**
+     * Lists all available rooms.
+     *
+     * @return array Array of room objects.
+     */
+    public function list_rooms() {
+        try {
+            $this->authenticate();
+            $roomlistreply = $this->av->roomsApi->listRooms($this->accesstoken, Room::TYPE_ROOM);
+            $nextpagetoken = $roomlistreply->getNextPageToken();
+            $rooms = $roomlistreply->getData();
 
-        return $rooms;
+            while ($nextpagetoken != null) {
+                $roomlistreply = $this->av->roomsApi->listRooms(
+                    $this->accesstoken,
+                    Room::TYPE_ROOM,
+                    $nextpagetoken
+                );
+
+                $rooms = array_merge($rooms, $roomlistreply->getData());
+                $nextpagetoken = $roomlistreply->getNextPageToken();
+            }
+
+            return $rooms;
+        } catch (ApiException $e) {
+            throw new moodle_exception(
+                get_string('room_list_error', 'mod_alfaview'),
+                'mod_alfaview'
+            );
+        }
+
+        return [];
     }
 }

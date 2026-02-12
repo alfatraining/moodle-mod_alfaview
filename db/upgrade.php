@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -33,8 +32,7 @@ require_once(__DIR__ . '/upgradelib.php');
  * @param int $oldversion
  * @return bool
  */
-function xmldb_alfaview_upgrade($oldversion)
-{
+function xmldb_alfaview_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
@@ -44,10 +42,14 @@ function xmldb_alfaview_upgrade($oldversion)
     //
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at:
-    // https://docs.moodle.org/dev/XMLDB_editor
+    // https://docs.moodle.org/dev/XMLDB_editor .
 
     if ($oldversion <= 2020063000) {
         unset_config('api_host', 'mod_alfaview');
+    }
+
+    if ($oldversion <= 2026011200) {
+        unset_config('api_guest_code', 'mod_alfaview');
     }
     return true;
 }

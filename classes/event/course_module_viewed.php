@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of the alfaview plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,8 +24,6 @@
 
 namespace mod_alfaview\event;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * The mod_alfaview instance list viewed event class
  *
@@ -39,12 +36,10 @@ defined('MOODLE_INTERNAL') || die();
  */
 class course_module_viewed extends \core\event\course_module_viewed
 {
-
     /**
      * Initialize the event
      */
-    protected function init()
-    {
+    protected function init() {
         $this->data['objecttable'] = 'alfaview';
         parent::init();
     }

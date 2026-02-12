@@ -4,7 +4,7 @@
 		<location>vendor/alfatraining/alfaview-php-sdk</location>
 		<name>alfatraining/alfaview-php-sdk</name>
 		<description>null</description>
-		<version>v2.4.2</version>
+		<version>v2.5.1</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
@@ -12,7 +12,7 @@
 		<location>vendor/guzzlehttp/guzzle</location>
 		<name>guzzlehttp/guzzle</name>
 		<description>Guzzle is a PHP HTTP client library</description>
-		<version>7.8.0</version>
+		<version>7.10.0</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
@@ -20,7 +20,7 @@
 		<location>vendor/guzzlehttp/promises</location>
 		<name>guzzlehttp/promises</name>
 		<description>Guzzle promises library</description>
-		<version>v1.3.1</version>
+		<version>2.3.0</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
@@ -28,7 +28,7 @@
 		<location>vendor/guzzlehttp/psr7</location>
 		<name>guzzlehttp/psr7</name>
 		<description>PSR-7 message implementation that also provides common utility methods</description>
-		<version>2.6.1</version>
+		<version>2.8.0</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
@@ -52,7 +52,7 @@
 		<location>vendor/psr/http-factory</location>
 		<name>psr/http-factory</name>
 		<description>Common interfaces for PSR-7 HTTP message factories</description>
-		<version>1.0.2</version>
+		<version>1.1.0</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
@@ -68,7 +68,7 @@
 		<location>vendor/symfony/deprecation-contracts</location>
 		<name>symfony/deprecation-contracts</name>
 		<description>A generic function and convention to trigger deprecation notices.</description>
-		<version>v3.3.0</version>
+		<version>3.6.0</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
