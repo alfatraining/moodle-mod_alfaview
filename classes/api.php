@@ -131,7 +131,7 @@ class mod_alfaview_api {
             $permissiongroups = $this->av->roomsApi->listPermissionGroups($this->accesstoken);
 
             $grouplinkcreate = new GroupLinkCreate();
-            $grouplinkcreate->setDescription("$grouplinkrole created by alfatraining-com for $roomid");
+            $grouplinkcreate->setDescription("$grouplinkrole created by Moodle for $roomid");
             $grouplinkcreate->setDialInAllowed(false);
 
             foreach ($permissiongroups as $group) {
