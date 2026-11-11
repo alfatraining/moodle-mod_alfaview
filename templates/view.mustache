@@ -1,8 +1,16 @@
 <h2>{{#str}}modulename, mod_alfaview{{/str}}</h2>
 <div class="box py-3 generalbox">
+    {{#joinLink}}
     <div class="pb-3">
         <a href="{{joinLink}}" class="btn btn-primary">{{#str}}join_button_label, mod_alfaview{{/str}}</a>
+        {{#webclientJoinLink}}
+        <a href="{{webclientJoinLink}}" class="btn btn-outline-primary" target="_blank" rel="noopener">{{#str}}join_webclient_button_label, mod_alfaview{{/str}}</a>
+        {{/webclientJoinLink}}
     </div>
+    {{/joinLink}}
+    {{#roomMissing}}
+    <div class="alert alert-warning">{{#str}}room_missing, mod_alfaview{{/str}}</div>
+    {{/roomMissing}}
     <p>
         {{#str}}join_help_download, mod_alfaview{{/str}}<br>
         {{#str}}join_help_support, mod_alfaview{{/str}}

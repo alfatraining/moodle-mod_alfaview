@@ -64,7 +64,8 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext($name, $title, $description, $default));
 
     // Test connection to alfaview.
-    if ($PAGE->url == $CFG->wwwroot . '/' . $CFG->admin . '/settings.php?section=modsettingalfaview') {
+    // Only on the plugin's own settings page; CLI installs and upgrades load this file without a page URL.
+    if ($PAGE->has_set_url() && $PAGE->url == $CFG->wwwroot . '/' . $CFG->admin . '/settings.php?section=modsettingalfaview') {
         $config = get_config('mod_alfaview');
         $testapiclientid = $config->api_client_id;
         $testapicode = $config->api_code;
@@ -80,9 +81,9 @@ if ($ADMIN->fulltree) {
             $credentials->setCompanyId($testapicompanyid);
 
             $response = $av->authenticationApi->authenticateAPIKey($credentials);
-            $accesstoken = $response->getAccessToken();
+            $av->setAccessToken($response->getAccessToken());
 
-            $tokeninfo = $av->authenticationApi->getTokenInfo($accesstoken);
+            $tokeninfo = $av->authenticationApi->getTokenInfo();
             if ($tokeninfo->getPermissions()->getRoomAdmin()) {
                 $connectionstatus = $OUTPUT->notification(
                     get_string('connection_status_ok', 'mod_alfaview'),

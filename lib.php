@@ -26,15 +26,31 @@
  * Return if the plugin supports $feature.
  *
  * @param string $feature Constant representing the feature.
- * @return true | null True if the feature is supported, null otherwise.
+ * @return mixed True or a feature value if the feature is supported, null otherwise.
  */
 function alfaview_supports($feature) {
     switch ($feature) {
         case FEATURE_MOD_INTRO:
-            return false;
+        case FEATURE_SHOW_DESCRIPTION:
+        case FEATURE_COMPLETION_TRACKS_VIEWS:
+        case FEATURE_BACKUP_MOODLE2:
+            return true;
+        case FEATURE_MOD_PURPOSE:
+            return MOD_PURPOSE_COMMUNICATION;
         default:
             return null;
     }
+}
+
+/**
+ * Whether the activity is branded.
+ *
+ * Moodle then shows the colored alfaview icon instead of tinting it with the activity purpose color.
+ *
+ * @return bool True if the activity is branded, false otherwise.
+ */
+function alfaview_is_branded(): bool {
+    return true;
 }
 
 /**
@@ -78,7 +94,14 @@ function alfaview_update_instance($moduleinstance, $mform = null) {
 
     unset($moduleinstance->room_id);
 
-    return $DB->update_record('alfaview', $moduleinstance);
+    $oldroomsettingsid = $DB->get_field('alfaview', 'room_settings_id', ['id' => $moduleinstance->id]);
+    $DB->update_record('alfaview', $moduleinstance);
+
+    if ($oldroomsettingsid != $moduleinstance->room_settings_id) {
+        alfaview_delete_unused_room_settings($oldroomsettingsid);
+    }
+
+    return true;
 }
 
 /**
@@ -96,8 +119,46 @@ function alfaview_delete_instance($id) {
     }
 
     $DB->delete_records('alfaview', ['id' => $id]);
+    alfaview_delete_unused_room_settings($exists->room_settings_id);
 
     return true;
+}
+
+/**
+ * Deletes room settings and their group links in alfaview once no activity uses them anymore.
+ *
+ * If none of the group links can be deleted, the room settings are kept: the links still work and are reused when the
+ * room is selected again. If only some are deleted, the room settings are deleted anyway, because a moderator or
+ * participant key without its link can't be used to join. Selecting the room again then creates new links.
+ *
+ * @param int $roomsettingsid The room settings ID.
+ */
+function alfaview_delete_unused_room_settings($roomsettingsid) {
+    global $CFG, $DB;
+
+    if (empty($roomsettingsid) || $DB->record_exists('alfaview', ['room_settings_id' => $roomsettingsid])) {
+        return;
+    }
+
+    $settings = $DB->get_record('alfaview_room_settings', ['id' => $roomsettingsid]);
+    if (!$settings) {
+        return;
+    }
+
+    require_once($CFG->dirroot . '/mod/alfaview/classes/api.php');
+    try {
+        $api = new mod_alfaview_api();
+        $complete = $api->delete_group_links($settings->room_id, [$settings->teacher_id, $settings->student_id]);
+    } catch (moodle_exception $e) {
+        debugging('alfaview group links of room ' . $settings->room_id . ' were not deleted: ' . $e->getMessage());
+        return;
+    }
+
+    if (!$complete) {
+        debugging('Some alfaview group links of room ' . $settings->room_id . ' were not deleted.');
+    }
+
+    $DB->delete_records('alfaview_room_settings', ['id' => $roomsettingsid]);
 }
 
 /**

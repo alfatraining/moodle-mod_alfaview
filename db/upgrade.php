@@ -22,10 +22,6 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-require_once(__DIR__ . '/upgradelib.php');
-
 /**
  * Execute mod_alfaview upgrade from the given old version.
  *
@@ -51,5 +47,35 @@ function xmldb_alfaview_upgrade($oldversion) {
     if ($oldversion <= 2026011200) {
         unset_config('api_guest_code', 'mod_alfaview');
     }
+
+    if ($oldversion < 2026102800) {
+        // Until 0.4.0 everyone with mod/alfaview:addinstance joined with the moderator link. Give those roles
+        // mod/alfaview:moderate, so custom roles outside its archetypes keep joining as moderators. The capability
+        // has to be installed before it can be assigned; Moodle would only do that after the upgrade steps.
+        update_capabilities('mod_alfaview');
+        $grants = $DB->get_records_sql(
+            'SELECT rc.id, rc.roleid, rc.contextid
+               FROM {role_capabilities} rc
+               JOIN {context} ctx ON ctx.id = rc.contextid
+              WHERE rc.capability = ? AND rc.permission = ?',
+            ['mod/alfaview:addinstance', CAP_ALLOW]
+        );
+        foreach ($grants as $grant) {
+            assign_capability('mod/alfaview:moderate', CAP_ALLOW, $grant->roleid, $grant->contextid);
+        }
+
+        // Activity description (FEATURE_MOD_INTRO).
+        $table = new xmldb_table('alfaview');
+        $field = new xmldb_field('intro', XMLDB_TYPE_TEXT, null, null, null, null, null, 'name');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('introformat', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '0', 'intro');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_mod_savepoint(true, 2026102800, 'alfaview');
+    }
+
     return true;
 }

@@ -24,6 +24,7 @@
 
 namespace mod_alfaview\privacy;
 
+use context;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\approved_userlist;
@@ -37,7 +38,10 @@ use core_privacy\local\request\userlist;
  * @copyright   alfatraining Bildungszentrum GmbH
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\provider
+class provider implements
+    \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider
 {
     /**
      * Get all metadata for this plugin with regards to privacy.
