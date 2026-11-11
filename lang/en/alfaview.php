@@ -39,8 +39,13 @@ $string['api_company_id_desc'] = 'The account identifier of your alfaview API cr
 $string['connection_status_ok'] = 'Connection successful.';
 $string['connection_status_error'] = 'Connection failed, please check that you entered the correct values and that the user who created the API key has permissions to administrate user and rooms.';
 $string['user_create_error'] = 'alfaview group link creation for room failed.';
+$string['group_link_delete_error'] = 'Deleting the alfaview group links of the room failed.';
 $string['join_link_create_error'] = 'Join link creation for room/user failed.';
 $string['room_list_error'] = 'Listing alfaview rooms failed.';
+$string['room_get_error'] = 'Loading the alfaview room failed.';
+$string['webclient_blocked'] = 'Joining in the browser is disabled for this classroom. Please use the alfaview app.';
+$string['missingidandcmid'] = 'No alfaview classroom was specified.';
+$string['nonewmodules'] = 'There are no alfaview classrooms in this course.';
 
 $string['modulename'] = 'alfaview classroom';
 $string['modulenameplural'] = 'alfaview classrooms';
@@ -48,14 +53,17 @@ $string['modulename_help'] = 'Conduct reliable, high quality online classes with
 
 $string['room_id'] = 'Select a room';
 $string['room_select'] = 'Search a room';
+$string['room_missing'] = 'This classroom is not linked to an alfaview room. A teacher needs to select a room in the activity settings.';
 $string['room_select_help'] = 'Go to <a href="https://app.alfaview.com/" target="_blank">your alfaview account</a> to create more rooms.';
 
 $string['join_button_label'] = 'Join classroom';
+$string['join_webclient_button_label'] = 'Join in browser';
 $string['join_help_download'] = 'Make sure alfaview is installed. Download <a href="https://alfaview.com/download" target="_blank">here</a>.';
 $string['join_help_support'] = 'Need more help? Visit the <a href="http://support.alfaview.com" target="_blank">alfaview support center</a>.';
 
 $string['alfaview:view'] = 'alfaview classroom';
 $string['alfaview:addinstance'] = 'Add alfaview classroom';
+$string['alfaview:moderate'] = 'Join alfaview classrooms as moderator';
 
 $string['privacy:metadata:alfaview'] = 'In order to join an alfaview classroom, a participant needs to provide a display name. alfaview uses the first and last name property of a Moodle user and concatenates them into a single string. This string is passed on to the meeting room server and vaporizes one hour after leaving the meeting room.';
 $string['privacy:metadata:alfaview:display_name'] = 'The display name of a participant inside an alfaview classroom';

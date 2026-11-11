@@ -37,6 +37,16 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
     ],
+    'mod/alfaview:moderate' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'coursecreator' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+        ],
+    ],
     'mod/alfaview:addinstance' => [
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',

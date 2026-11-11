@@ -39,8 +39,13 @@ $string['api_company_id_desc'] = 'Der Kontoname Ihrer alfaview API Zugangsdaten.
 $string['connection_status_ok'] = 'Verbindung erfolgreich.';
 $string['connection_status_error'] = 'Verbindung fehlgeschlagen. Überprüfen Sie, ob Sie die richtigen Werte eingegeben haben und ob der Benutzer, der den API-Schlüssel erstellt hat, über Berechtigungen zum Verwalten von Benutzern und Räumen verfügt.';
 $string['user_create_error'] = 'Die Erstellung des alfaview-Gruppenlinks für den Raum ist fehlgeschlagen.';
+$string['group_link_delete_error'] = 'Das Löschen der alfaview-Gruppenlinks des Raums ist fehlgeschlagen.';
 $string['join_link_create_error'] = 'Die Erstellung des Joinlinks für Raum/Benutzer ist fehlgeschlagen.';
 $string['room_list_error'] = 'Das Auflisten der alfaview-Räume ist fehlgeschlagen.';
+$string['room_get_error'] = 'Das Laden des alfaview-Raums ist fehlgeschlagen.';
+$string['webclient_blocked'] = 'Die Teilnahme im Browser ist für diesen Klassenraum deaktiviert. Bitte nutzen Sie die alfaview App.';
+$string['missingidandcmid'] = 'Es wurde kein alfaview Klassenraum angegeben.';
+$string['nonewmodules'] = 'In diesem Kurs gibt es keine alfaview Klassenräume.';
 
 $string['modulename'] = 'alfaview Klassenraum';
 $string['modulenameplural'] = 'alfaview Klassenräume';
@@ -48,14 +53,17 @@ $string['modulename_help'] = 'Nutzen Sie die alfaview Videokonferenz-Technologie
 
 $string['room_id'] = 'Raum auswählen';
 $string['room_select'] = 'Raum suchen';
+$string['room_missing'] = 'Dieser Klassenraum ist mit keinem alfaview-Raum verknüpft. Eine Lehrkraft muss in den Einstellungen der Aktivität einen Raum auswählen.';
 $string['room_select_help'] = 'Besuchen Sie <a href="https://app.alfaview.com/" target="_blank">Ihr alfaview-Konto</a> um weitere Räume zu erstellen.';
 
 $string['join_button_label'] = 'Klassenraum betreten';
+$string['join_webclient_button_label'] = 'Im Browser betreten';
 $string['join_help_download'] = 'Stellen Sie sicher, dass alfaview installiert ist. Download <a href="https://alfaview.com/download" target="_blank">hier</a>.';
 $string['join_help_support'] = 'Benötigen Sie weitere Hilfe? Besuchen Sie das <a href="http://support.alfaview.com" target="_blank">alfaview Support-Center</a>.';
 
 $string['alfaview:view'] = 'alfaview Klassenraum';
 $string['alfaview:addinstance'] = 'alfaview Klassenraum hinzufügen';
+$string['alfaview:moderate'] = 'alfaview Klassenräume als Moderator betreten';
 
 $string['privacy:metadata:alfaview'] = 'Um einen alfaview Klassenraum zu betreten, muss ein Teilnehmer einen Anzeigenamen vergeben. alfaview nutzt den Vor- und den Nachnamen eines Moodle-Nutzers und verbindet diese zu einer einzelnen Zeichenfolge. Diese Zeichenfolge wird an den Server übermittelt und eine Stunde nach Verlassen des Konferenzraumes gelöscht.';
 $string['privacy:metadata:alfaview:display_name'] = 'Der Anzeigename eines Teilnehmers in einem alfaview Klassenraum';

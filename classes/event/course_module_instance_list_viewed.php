@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin upgrade helper functions are defined here.
+ * Defines the instance list viewed event.
  *
  * @package     mod_alfaview
  * @copyright   alfatraining Bildungszentrum GmbH
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Helper function used by the upgrade.php file.
- */
-function mod_alfaview_helper_function() {
-    global $DB;
+namespace mod_alfaview\event;
 
-    // Please note that you should always be performing any task using raw (low
-    // level) database access exclusively, avoiding any use of the Moodle APIs.
-    //
-    // For more information please read the available Moodle documentation:
-    // https://docs.moodle.org/dev/Upgrade_API .
+/**
+ * The mod_alfaview instance list viewed event class
+ *
+ * @package     mod_alfaview
+ * @copyright   alfatraining Bildungszentrum GmbH
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed
+{
 }
