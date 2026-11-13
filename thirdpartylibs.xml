@@ -9,74 +9,18 @@
 		<licenseversion></licenseversion>
 	</library>
 	<library>
-		<location>vendor/guzzlehttp/guzzle</location>
-		<name>guzzlehttp/guzzle</name>
-		<description>Guzzle is a PHP HTTP client library</description>
-		<version>7.16.1</version>
+		<location>vendor/autoload.php</location>
+		<name>composer/composer</name>
+		<description>Composer autoloader</description>
+		<version>2.10.3</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
 	<library>
-		<location>vendor/guzzlehttp/promises</location>
-		<name>guzzlehttp/promises</name>
-		<description>Guzzle promises library</description>
-		<version>2.6.0</version>
-		<license>MIT</license>
-		<licenseversion></licenseversion>
-	</library>
-	<library>
-		<location>vendor/guzzlehttp/psr7</location>
-		<name>guzzlehttp/psr7</name>
-		<description>PSR-7 message implementation that also provides common utility methods</description>
-		<version>2.13.2</version>
-		<license>MIT</license>
-		<licenseversion></licenseversion>
-	</library>
-	<library>
-		<location>vendor/psr/http-client</location>
-		<name>psr/http-client</name>
-		<description>Common interface for HTTP clients</description>
-		<version>1.0.3</version>
-		<license>MIT</license>
-		<licenseversion></licenseversion>
-	</library>
-	<library>
-		<location>vendor/psr/http-factory</location>
-		<name>psr/http-factory</name>
-		<description>PSR-17: Common interfaces for PSR-7 HTTP message factories</description>
-		<version>1.1.0</version>
-		<license>MIT</license>
-		<licenseversion></licenseversion>
-	</library>
-	<library>
-		<location>vendor/psr/http-message</location>
-		<name>psr/http-message</name>
-		<description>Common interface for HTTP messages</description>
-		<version>2.0</version>
-		<license>MIT</license>
-		<licenseversion></licenseversion>
-	</library>
-	<library>
-		<location>vendor/ralouphie/getallheaders</location>
-		<name>ralouphie/getallheaders</name>
-		<description>A polyfill for getallheaders.</description>
-		<version>3.0.3</version>
-		<license>MIT</license>
-		<licenseversion></licenseversion>
-	</library>
-	<library>
-		<location>vendor/symfony/deprecation-contracts</location>
-		<name>symfony/deprecation-contracts</name>
-		<description>A generic function and convention to trigger deprecation notices</description>
-		<version>v3.7.1</version>
-		<license>MIT</license>
-		<licenseversion></licenseversion>
-	</library>
-	<library>
-		<location>vendor/symfony/polyfill-php80</location>
-		<name>symfony/polyfill-php80</name>
-		<description>Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions</description>
-		<version>v1.43.0</version>
+		<location>vendor/composer</location>
+		<name>composer/composer</name>
+		<description>Composer autoloader</description>
+		<version>2.10.3</version>
 		<license>MIT</license>
 		<licenseversion></licenseversion>
 	</library>
