@@ -25,7 +25,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_alfaview';
-$plugin->release = '0.5.0';
-$plugin->version = 2026111104;
+$plugin->release = '0.5.1';
+$plugin->version = 2026111300;
 $plugin->requires = 2024100708;
+// The Moodle Marketplace reads the supported Moodle versions from here. Only add versions that were tested.
+$plugin->supported = [405, 503];
 $plugin->maturity = MATURITY_STABLE;
